@@ -1,3 +1,11 @@
 <?php
-require_once('../PukiWikiUtility.class.php');
-print_r(PukiWikiUtility::search('http://gps.tanaka.ecc.u-tokyo.ac.jp/gpsshogi/', 'GPS将棋'));
+require_once('PukiWikiUtility.class.php');
+$result = PukiWikiUtility::search('http://pukiwiki.sourceforge.jp/', 'PukiWiki');
+if (isset($result)) {
+    echo 'test ok';
+} else {
+    echo 'test failed';
+}
+
+
+

@@ -14,7 +14,15 @@ class PukiWikiUtility {
             $list_str = $matches[1];
             $matches = NULL;
             if (preg_match_all('/.+?href="(.+?)">(.+?)<\/a>/', $list_str, $matches, PREG_SET_ORDER) > 0) {
-                $result = $matches;
+                $result = array();
+                foreach($matches as $match) {
+                    $url = $match[1];
+                    $title = $match[2];
+                    // 稀にEUC-JPのPukiWikiがある
+                    // $url = mb_convert_encoding($match[1], 'UTF-8', 'EUC-JP');
+                    // $title = mb_convert_encoding($match[2], 'UTF-8', 'EUC-JP');
+                    $result[] = array('title' => $title, 'url' => $url);
+                }
             }
         }
         return $result;
@@ -22,16 +30,6 @@ class PukiWikiUtility {
 }
 
 class HttpUtility {
-    // This method is http_build_query.
-    /* public static function paramsFromDictionary($dictionary) { */
-    /*     $params = array(); */
-    /*     foreach ($dictionary as $k => $v) { */
-    /*         $params[] = $k . '='. urlencode($v); */
-    /*     } */
-    /*     $param = implode('&', $params); */
-    /*     return $param; */
-    /* } */
-
     public static function requestPost($url, $dict) {
         $query = http_build_query($dict);
         $headers = array(
