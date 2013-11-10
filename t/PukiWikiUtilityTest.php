@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__DIR__) . '/PukiWikiUtility.class.php');
 assert_options(ASSERT_BAIL, 1);
-$result = PukiWikiUtility::search('http://pukiwiki.sourceforge.jp/', 'PukiWiki');
+$results = PukiWikiUtility::search('http://pukiwiki.sourceforge.jp/', 'PukiWiki');
 
 assert(isset($results));
 assert(is_array($results));
